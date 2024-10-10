@@ -11,7 +11,7 @@ function App() {
   async function fetchDataAW() {
     try {
       const response = await fetch(url, { method: "GET" });
-      const data = await response.json(); // extract JSON from response
+      const data = await response.json();
       return data;
     } catch (error) {
       console.log("Error fetching data: ", error);
@@ -41,6 +41,20 @@ function App() {
     }
   }
 
+  const updateProductAW = async (updatedProduct) => {
+    try {
+      const response = await fetch(`${url}/${updatedProduct.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedProduct),
+      });
+    } catch (error) {
+      console.log('Error updating product: ', error);
+    }
+  };
+
   async function deleteProductAW(product) {
     try {
       await fetch(url + `/${product.id}`, {
@@ -54,13 +68,15 @@ function App() {
     }
   }
 
-  const addProduct = async (title, description, players, categories) => {
+  const addProduct = async ({title, description, category, cantidad}) => {
     const newProduct = {
       title: title,
       description: description,
-      players: players,
-      categories: categories,
+      category: category,
+      cantidad: cantidad,
+      comprado: false,
     };
+    console.log(newProduct);
     await postProduct(newProduct);
     setProducts([...products, newProduct]);
   };
@@ -72,11 +88,19 @@ function App() {
     ]);
   };
 
+  const updateProduct = (updatedProduct) => {
+    updateProductAW(updatedProduct);
+    setProducts([
+      ...products.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product),
+    ]);
+  };
+
   return (
     <Routes>
       <Route path="/*" element={<Navigate replace to="/home" />} />
-      <Route path="/home" element={<HomePage products={products} deleteProduct={deleteProduct}/>} />
-      <Route path="/aisle/:category" element={<Aisle products={products} deleteProduct={deleteProduct}/>} />
+      <Route path="/home" element={<HomePage products={products} deleteProduct={deleteProduct} addProduct={addProduct} updateProduct={updateProduct}/>} />
+      <Route path="/aisle/:category" element={<Aisle products={products} deleteProduct={deleteProduct} updateProduct={updateProduct}/>} />
     </Routes>
   );
 }

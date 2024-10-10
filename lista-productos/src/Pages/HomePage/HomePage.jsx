@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./HomePage.module.css";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import Modal from "../../Components/modal/modal";
 
-function HomePage({ products, deleteProduct }) {
+function HomePage({ products, deleteProduct, addProduct, updateProduct }) {
   const [currentCategory, setCurrentCategory] = useState("none");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,12 +19,20 @@ function HomePage({ products, deleteProduct }) {
     setCurrentCategory(event.target.value);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+      setIsModalOpen(false);
+  };
+
   return (
     <div className={classes.homePageContainer}>
       <header>
         <div>
           <h1 className="title is-1" id={classes.title}>
-            Products List
+            Shopping List
           </h1>
         </div>
         <div className={classes.buttonContainer}>
@@ -36,7 +46,7 @@ function HomePage({ products, deleteProduct }) {
               </select>
             </div>
           </div>
-          <button className="button" id={classes.addProductButton}>
+          <button className="button" id={classes.addProductButton} onClick={() => openModal()}>
             add product
           </button>
         </div>
@@ -48,10 +58,14 @@ function HomePage({ products, deleteProduct }) {
               key={product.id}
               product={product}
               deleteProduct={deleteProduct}
+              updateProduct={updateProduct}
             />
           );
         })}
       </div>
+      {isModalOpen && (
+        <Modal closeModal={closeModal} addProduct={addProduct}/>
+      )}
     </div>
   );
 }
