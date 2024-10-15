@@ -38,24 +38,26 @@ const Modal = ({ closeModal, addProduct }) => {
                         <div className="field">
                             <label className="label">Description</label>
                             <div className="control">
-                                <textarea id="product-description" className="textarea" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
+                                <textarea id="product-description" className="textarea" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}/>
                             </div>
                         </div>
-                        <div className="field">
-                            <label className="label">Category</label>
-                            <div className="control">
-                                <select id="product-category" className="select" value={category} onChange={(e) => setCategory(e.target.value)} required>
-                                    <option value="" disabled>Category</option>
-                                    <option value="Fruits">Fruits</option>
-                                    <option value="Dairy">Dairy</option>
-                                    <option value="Grains">Grains</option>
-                                </select>
+                        <div className="field is-grouped">
+                            <div className="field">
+                                <label className="label">Category</label>
+                                <div className="control">
+                                    <select id="product-category" className="select" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                                        <option value="" disabled>Category</option>
+                                        <option value="Fruits">Fruits</option>
+                                        <option value="Dairy">Dairy</option>
+                                        <option value="Grains">Grains</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Quantity</label>
-                            <div className="control">
-                                <input id="product-cantidad" className="number" placeholder="Quantity" value={cantidad} onChange={(e) => setQuantity(e.target.value)} required type="number"/>
+                            <div className="field">
+                                <label className="label">Quantity</label>
+                                <div className="control">
+                                    <input id="product-cantidad" className="number" placeholder="Quantity" value={cantidad} onChange={(e) => setQuantity(e.target.value)} required type="number"/>
+                                </div>
                             </div>
                         </div>
                         <div className={`field is-grouped ${classes.buttons}`}>

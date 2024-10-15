@@ -23,7 +23,6 @@ function App() {
 
     productsPromise.then((data) => {
       setProducts([...data]);
-      console.log("adentro");
     });
   }, []);
 
@@ -76,16 +75,23 @@ function App() {
       cantidad: cantidad,
       comprado: false,
     };
-    console.log(newProduct);
-    await postProduct(newProduct);
-    setProducts([...products, newProduct]);
+    if (products.length < 20) {
+      await postProduct(newProduct);
+      setProducts([...products, newProduct]);
+    } else {
+      alert("You can't have more than 20 products in the list");
+    }
   };
 
   const deleteProduct = (product) => {
-    deleteProductAW(product);
-    setProducts([
-      ...products.filter((currentSport) => currentSport.id !== product.id),
-    ]);
+    if (products.length > 5) {
+      deleteProductAW(product);
+      setProducts([
+        ...products.filter((currentSport) => currentSport.id !== product.id),
+      ]);
+    } else {
+      alert("You must have at least 5 products in the list");
+    }
   };
 
   const updateProduct = (updatedProduct) => {

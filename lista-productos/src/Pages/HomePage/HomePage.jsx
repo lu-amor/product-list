@@ -27,6 +27,16 @@ function HomePage({ products, deleteProduct, addProduct, updateProduct }) {
       setIsModalOpen(false);
   };
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().startsWith(searchTerm.toLowerCase())
+  );
+
   return (
     <div className={classes.homePageContainer}>
       <header>
@@ -46,13 +56,29 @@ function HomePage({ products, deleteProduct, addProduct, updateProduct }) {
               </select>
             </div>
           </div>
-          <button className="button" id={classes.addProductButton} onClick={() => openModal()}>
+          <div className="field has-addons">
+            <p className="control">
+              <input
+                className="input"
+                type="text"
+                placeholder="Find a product"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </p>
+
+          </div>
+          <button
+            className="button"
+            id={classes.addProductButton}
+            onClick={() => openModal()}
+          >
             add product
           </button>
         </div>
       </header>
       <div className={classes.cardsContainer}>
-        {products.map((product) => {
+        {filteredProducts.map((product) => {
           return (
             <ProductCard
               key={product.id}
@@ -64,7 +90,7 @@ function HomePage({ products, deleteProduct, addProduct, updateProduct }) {
         })}
       </div>
       {isModalOpen && (
-        <Modal closeModal={closeModal} addProduct={addProduct}/>
+        <Modal closeModal={closeModal} addProduct={addProduct} />
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./ProductCard.module.css";
 
-function ProductCard({ product, deleteProduct,updateProduct }) {
+function ProductCard({ product, deleteProduct, updateProduct }) {
   const [comprado, setComprado] = useState(product.comprado);
 
   const handleCompradoBtn = () => {

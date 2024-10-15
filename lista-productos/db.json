@@ -7,7 +7,7 @@
       "category": "Fruits",
       "cantidad": 50,
       "emoji": "🍎",
-      "comprado": "false"
+      "comprado": true
     },
     {
       "id": "2",
@@ -16,7 +16,7 @@
       "category": "Dairy",
       "cantidad": 30,
       "emoji": "🥛",
-      "comprado": true
+      "comprado": false
     },
     {
       "id": "3",
@@ -26,15 +26,6 @@
       "cantidad": 25,
       "emoji": "🍚",
       "comprado": true
-    },
-    {
-      "id": "4",
-      "title": "Banana",
-      "description": "500g bananas",
-      "category": "Fruits",
-      "cantidad": 40,
-      "emoji": "🍌",
-      "comprado": "false"
     },
     {
       "id": "5",
@@ -89,6 +80,14 @@
       "cantidad": 60,
       "emoji": "🧀",
       "comprado": true
+    },
+    {
+      "id": "7d2f",
+      "title": "Grapes",
+      "description": "",
+      "category": "Fruits",
+      "cantidad": "6",
+      "comprado": false
     }
   ]
 }
